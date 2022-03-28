@@ -23,9 +23,9 @@ def Coursese_infor():
 
 def listStudent():
     print('Number of student in class: ')
-    print(f'{"ID":^10}{"DATE OF BIRTH":^15}{"NAME":^20}')
+    print(f'{"ID":^20}{"DATE OF BIRTH":^20}{"NAME":^20}')
     for i in student:
-        print(f"{student['id']:^10}{student['dob']:^15}{student['name']:>20}")
+        print(f"{student['id']:^20}{student['dob']:^20}{student['name']:>20}")
 
 def list_courses():
     print('Listing available courses:')
@@ -38,9 +38,9 @@ def show_marks_of_course(course):
     if 'marks' in course:
         print(f"Show marks of the course {course['name']}:")
 
-        print(f'{"NAME":^20}{"MARK":^5}')
+        print(f'{"NAME":^20}{"MARK":^6}')
         for student, mark in course['marks']:
-            print(f"{student['name']:<20}{mark:>5}")
+            print(f"{student['name']:<20}{mark:>6}")
     else:
         print('This course has no marks.')
 
