@@ -1,3 +1,7 @@
+import re
+import sys
+import math
+
 class MarkManager:
     class Mark:
         def __init__(self, value, r_obj=None, e_obj=None):
@@ -241,15 +245,6 @@ def list_courses():
             print(info)
     print()
 
-def list_mark_details(course):
-    def list_mark_details_specific():
-        print(f"Course [{course.get_name()}]'s marksheet:")
-        print(f'{"STUDENT NAME":^20}{"MARK":^10}')
-        for mark in course.show_marks():
-            student = mark.get_object(Student)
-            print(f'{student.get_name():<20}{mark.get_value():^10}')
-    return list_mark_details_specific
-
 def list_marks():
     cmds = CommandList()
     for course in Container.courses:
@@ -259,21 +254,6 @@ def list_marks():
                          cmds,
                          f'[1-{cmds.get_length()}]')
     cmdp.main_loop()
-
-def input_mark_details(course):
-    def input_mark_details_specific():
-        print(f'Input marks for course [{course.get_name()}]:')
-        for student in Container.students:
-            user_input_mark = Validator(
-                input(f'Enter mark of student [{student.get_name()}]: '),
-                '[0-9.]+')
-            if user_input_mark.is_ok():
-                value = math.floor(user_input_mark.value(float))
-                course.add_mark(value, student)
-                student.add_mark(value, course)
-            else:
-                return False
-    return input_mark_details_specific
 
 def calculate_aver_student(student):
     def calculate_aver_student_specific():
@@ -292,7 +272,6 @@ if __name__ == '__main__':
                 ('Show courses', list_courses),
                 ('Show marks of a course', list_marks),
                 ('Calculate aver of a student', calculate_gpa),
-                ('Exit', lambda: -10)]), '[1-8]')
     cmdp.main_loop()
 
     
