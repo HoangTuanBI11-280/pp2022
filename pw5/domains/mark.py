@@ -1,4 +1,5 @@
 from domains.mark import *
+from domains.store import *
 
 class MarkManager:
     class Mark:
@@ -37,3 +38,13 @@ class MarkManager:
         
         def has_marks(self):
           return bool(self._marks)
+        
+        def export_info(self):
+            ds = DataStorage('marks.txt')
+            ds.write(' --- '.join([self.__manager.get_name(),
+                                   self.__managee.get_name(),
+                                   str(self.__value)]))
+
+        def import_info(self):
+            ds = DataStorage('marks.txt')
+            manager_name, managee_name, value = ds.read().split(' --- ')

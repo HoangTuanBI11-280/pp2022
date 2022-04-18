@@ -2,6 +2,7 @@ import math
 import numpy as np
 from domains.course import *
 from domains.mark import *
+from domains.store import *
 
 class Student(MarkManager):
   def print(self):
@@ -43,3 +44,11 @@ class Student(MarkManager):
         self.__pre_calculate_gpa()
         self.__gpa = math.floor(np.average(
                 np.array(self.__mark_values), weights=np.array(self.__credits)))
+
+    def export_info(self):
+        ds = DataStorage('students.txt')
+        ds.write(f'{self.__id} --- {self.__dob} --- {self.__name}')
+
+    def import_info(self):
+        ds = DataStorage('students.txt')
+        self.__id, self.__dob, self.__name = ds.read().split(' --- ')

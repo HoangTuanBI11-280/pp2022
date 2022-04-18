@@ -10,4 +10,5 @@ from output import *
                 ('Show courses', list_courses),
                 ('Show marks of a course', list_marks),
                 ('Calculate aver of a student', calculate_aver),
+                ('Exit', exit_program)]), '[1-8]')
     cmdp.main_loop()

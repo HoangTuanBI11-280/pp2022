@@ -1,4 +1,5 @@
 from domains.mark import *
+from domains.store import *
 
 class Course(MarkManager):
      def print(self):
@@ -21,3 +22,13 @@ class Course(MarkManager):
       
      def get_marksheet(self):
         return self.__marksheet
+    
+    
+     def export_info(self):
+        ds = DataStorage('courses.txt')
+        ds.write(f'{self.__id} --- {self.__name} --- {self.__ects}')
+
+     def import_info(self):
+        ds = DataStorage('courses.txt')
+        self.__id, self.__name, self.__ects = ds.read().split(' --- ')
+        self.__ects = int(self.__ects)
